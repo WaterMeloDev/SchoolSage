@@ -29,11 +29,11 @@ async def load():
         if filename.endswith('.py'):
             await client.load_extension(f'cogs.{filename[:-3]}')
 
-activity = discord.Activity(type=discord.ActivityType.listening, name="your questions")
+activity = discord.Activity(type=discord.ActivityType.competing, name=">help")
 
 @tasks.loop(seconds=5)
 async def change_status():
-    await client.change_presence(activity=activity, status=discord.Status.idle)
+    await client.change_presence(activity=activity, status=discord.Status.online)
 
 
 async def main():

@@ -95,17 +95,7 @@ class Mod(commands.Cog):
             await ctx.send(f"Unshadowbanned {member}")
         else:
             await ctx.send(f"{member} is not shadowbanned.")
-
-
-    @commands.Cog.listener()
-    async def on_member_join(self, member):
-        with open('src/data/blacklisted.json', 'r') as f:
-            blacklisted = json.load(f)
-        if str(member.id) in blacklisted:
-            await member.kick(reason="shadowbanned")
-        else:
-            pass
-    
+  
 
 async def setup(bot):
     await bot.add_cog(Mod(bot))
