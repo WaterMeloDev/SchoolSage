@@ -29,7 +29,7 @@ async def load():
         if filename.endswith('.py'):
             await client.load_extension(f'cogs.{filename[:-3]}')
 
-activity = discord.Activity(type=discord.ActivityType.competing, name=">help")
+activity = discord.Activity(type=discord.ActivityType.competing, name="slash commands!")
 
 @tasks.loop(seconds=5)
 async def change_status():

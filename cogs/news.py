@@ -14,7 +14,7 @@ class NewsCmd(commands.Cog):
 
     
     @app_commands.command(name="news", description="View the news from school events")
-    @commands.has_permissions(administrator=True)
+    @app_commands.checks.has_permissions(administrator=True)
     async def news_cmd(self, interaction: discord.Interaction, header: str, event_name: str, description: str, thumbnail_url: str):
         embed = discord.Embed(title=f"{header}", color=0x5865F2)
         embed.set_thumbnail(url=f"{thumbnail_url}")

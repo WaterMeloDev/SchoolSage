@@ -1,6 +1,7 @@
 import discord
 import random
 from discord.ext import commands
+from discord import app_commands
 from colorama import Fore
 
 class Games(commands.Cog):
@@ -13,11 +14,8 @@ class Games(commands.Cog):
 
     
     # 8BALL command
-    @commands.command(name="8ball", description="ask the magic 8ball a question")
-    async def eightball_cmd(self, ctx, *, question: str = None):
-        if question == None:
-            await ctx.send("Ask a question: Ex: `>8ball Am I cool?`")
-        else:
+    @app_commands.command(name="8ball", description="ask the magic 8ball a question")
+    async def eightball_cmd(self, interaction: discord.Interaction, question: str):
             responses = ["It is certain.",
                         "It is decidedly so.",
                         "Without a doubt.",
@@ -42,30 +40,30 @@ class Games(commands.Cog):
             embed.add_field(name="Question:", value=f"{question}", inline=False)
             embed.add_field(name="Answer:", value=f"{random.choice(responses)}", inline=False)
             embed.set_footer(text="You are sus~")
-            await ctx.send(embed=embed)
+            await interaction.response.send_message(embed=embed)
 
         # COINFLIP command
-    @commands.command(name="coinflip", description="flip a coin")
-    async def coinflip_cmd(self, ctx):
+    @app_commands.command(name="coinflip", description="flip a coin")
+    async def coinflip_cmd(self, interaction: discord.Interaction):
         responses = ["Heads",
                      "Tails"]
-        await ctx.send(f"{random.choice(responses)}")
+        await interaction.response.send_message(f"{random.choice(responses)}")
 
         # DICE command
-    @commands.command(name="dice", description="roll a dice")
-    async def dice_cmd(self, ctx):
+    @app_commands.command(name="dice", description="roll a dice")
+    async def dice_cmd(self, interaction: discord.Interaction):
         responses = ["1",
                      "2",
                      "3",
                      "4",
                      "5",
                      "6"]
-        await ctx.send(f"{random.choice(responses)}")
+        await interaction.response.send_message(f"{random.choice(responses)}")
 
         # PING command
-    @commands.command(name="ping", description="get the bot's ping")
-    async def ping_cmd(self, ctx):
-        await ctx.send(f"Pong! {round(self.bot.latency * 1000)}ms")
+    @app_commands.command(name="ping", description="get the bot's ping")
+    async def ping_cmd(self, interaction: discord.Interaction):
+        await interaction.response.send_message(f"Pong! {round(self.bot.latency * 1000)}ms")
 
 async def setup(bot):
     await bot.add_cog(Games(bot))
