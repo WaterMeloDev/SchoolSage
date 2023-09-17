@@ -13,7 +13,6 @@ class NewsCmd(commands.Cog):
         print(f"{Fore.GREEN}[ OK ]{Fore.RESET} Loaded news.py!")
 
     
-    # Command to display info about me
     @app_commands.command(name="news", description="View the news from school events")
     @commands.has_permissions(administrator=True)
     async def news_cmd(self, interaction: discord.Interaction, header: str, event_name: str, description: str, thumbnail_url: str):
