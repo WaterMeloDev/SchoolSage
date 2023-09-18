@@ -29,7 +29,7 @@ class JoinEvent(commands.Cog):
     
     # Leave Event
     @commands.Cog.listener()
-    async def on_member_leave(self, member):
+    async def on_member_remove(self, member):
         channel = await self.client.fetch_channel(1149594511761227858)
         await channel.send(f"{member} has left the group chat.")
 
