@@ -3,7 +3,7 @@ from discord.ext import commands
 from discord import app_commands
 from colorama import Fore
 
-class Info(commands.Cog):
+class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
@@ -13,23 +13,49 @@ class Info(commands.Cog):
 
     
     # help command
-    @app_commands.command(name="help", description="Shows a list of commands")
-    async def help_cmd(self, interaction: discord.Interaction):
-        embed = discord.Embed(title="Help", color=0x000000)
-        embed.add_field(name="/help", value="Shows a list of commands", inline=True)
-        embed.add_field(name="/8ball", value="Ask the magic 8ball a question.", inline=True)
-        embed.add_field(name="/coinflip", value="Flip a coin.", inline=True)
-        embed.add_field(name="/dice", value="Roll a dice.", inline=True)
-        embed.add_field(name="/ping", value="Get the bot's ping.", inline=True)
-        embed.add_field(name="/kick", value="Kick a member.", inline=True)
-        embed.add_field(name="/ban", value="Ban a member.", inline=True)
-        embed.add_field(name="/unban", value="Unban a member.", inline=True)
-        embed.add_field(name="/shadowban", value="Shadowban a member.", inline=True)
-        embed.add_field(name="/warn", value="Warn a member.", inline=True)
-        embed.add_field(name="/warnings", value="Get a member's warnings.", inline=True)
-        embed.add_field(name="/clearwarns", value="Clear a member's warnings.", inline=True)
-        embed.add_field(name="/clear", value="Clear messages.", inline=True)
+    @app_commands.command(name="teacherhelp", description="👩‍🏫 Show a list of teacher commands")
+    async def teacherhelp_cmd(self, interaction: discord.Interaction):
+        embed = discord.Embed(
+            title="👩‍🏫 Teacher Discord Bot Commands",
+            description="Here are some useful commands for teachers:",
+            color=0x27ae60,
+        )
+
+        # Add commands with descriptions and emojis
+        embed.add_field(name="📋 /schedule", value="View class schedules.", inline=False)
+        embed.add_field(name="📢 /announce", value="Send important announcements to students.", inline=False)
+        embed.add_field(name="📅 /homework", value="Manage and distribute homework assignments.", inline=False)
+        embed.add_field(name="📚 /info", value="Access educational resources and information.", inline=False)
+        embed.add_field(name="📖 /grades", value="Manage and view student grades.", inline=False)
+        embed.add_field(name="👥 /enroll", value="Enroll students in courses.", inline=False)
+        embed.add_field(name="📊 /report", value="Generate reports and analytics.", inline=False)
+        embed.add_field(name="👩‍🎓 /students", value="View and manage student profiles.", inline=False)
+        embed.add_field(name="👨‍🏫 /teachers", value="Access teacher-specific features.", inline=False)
+        embed.add_field(name="📜 /help", value="Show this list of commands.", inline=False)
+
+        # Send the embed as a response
+        await interaction.response.send_message(embed=embed)
+
+    
+    @app_commands.command(name="studenthelp", description="🎓 Show a list of student commands")
+    async def studenthelp_cmd(self, interaction: discord.Interaction):
+        embed = discord.Embed(
+            title="🎓 Student Discord Bot Commands",
+            description="Here are some commands tailored for students:",
+            color=0xff5733, 
+        )
+
+        # Add commands with descriptions and emojis
+        embed.add_field(name="📋 /schedule", value="View your class schedule.", inline=False)
+        embed.add_field(name="📢 /announcements", value="Check for important announcements.", inline=False)
+        embed.add_field(name="📅 /homework", value="Manage and keep track of homework assignments.", inline=False)
+        embed.add_field(name="📚 /resources", value="Access helpful educational resources.", inline=False)
+        embed.add_field(name="📊 /grades", value="Check your grades and performance.", inline=False)
+        embed.add_field(name="🎉 /events", value="Find and join school events and clubs.", inline=False)
+        embed.add_field(name="📜 /help", value="Show this list of commands.", inline=False)
+
+        # Send the embed as a response
         await interaction.response.send_message(embed=embed)
 
 async def setup(bot):
-    await bot.add_cog(Info(bot))
+    await bot.add_cog(Help(bot))
